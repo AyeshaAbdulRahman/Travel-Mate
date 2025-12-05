@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:smd_project_travelmate/app_router.dart';
 import 'package:smd_project_travelmate/models/spot.dart';
 import 'package:smd_project_travelmate/widgets/custom_appbar.dart';
 
@@ -12,12 +11,12 @@ class SpotDetailScreen extends StatefulWidget {
   State<SpotDetailScreen> createState() => _SpotDetailScreenState();
 }
 
-class _SpotDetailScreenState extends State<SpotDetailScreen> with SingleTickerProviderStateMixin {
+class _SpotDetailScreenState extends State<SpotDetailScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _imageAnimation;
   late Animation<double> _contentAnimation;
   late Animation<Offset> _slideAnimation;
-  bool _isButtonPressed = false;
 
   @override
   void initState() {
@@ -168,9 +167,9 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> with SingleTickerPr
                     child: Text(
                       widget.spot.name,
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: const Color(0xFF778873),
-                      ),
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xFF778873),
+                          ),
                     ),
                   ),
                   if (widget.spot.category != null)
@@ -217,11 +216,10 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> with SingleTickerPr
                 icon: Icons.location_on_rounded,
                 title: 'Location',
                 content: widget.spot.location.address ??
-                    'Lat: ${widget.spot.location.latitude.toStringAsFixed(4)}, Lng: ${widget.spot.location.longitude.toStringAsFixed(4)}',
+                    'Lat: ${widget.spot.location.latitude.toStringAsFixed(4)}, '
+                        'Lng: ${widget.spot.location.longitude.toStringAsFixed(4)}',
               ),
-              const SizedBox(height: 32),
-              _buildMapButton(),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
             ],
           ),
         ),
@@ -265,9 +263,9 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> with SingleTickerPr
               Text(
                 title,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xFF778873),
-                ),
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xFF778873),
+                    ),
               ),
             ],
           ),
@@ -275,67 +273,11 @@ class _SpotDetailScreenState extends State<SpotDetailScreen> with SingleTickerPr
           Text(
             content,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: const Color(0xFF778873).withOpacity(0.8),
-              height: 1.5,
-            ),
+                  color: const Color(0xFF778873).withOpacity(0.8),
+                  height: 1.5,
+                ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildMapButton() {
-    return GestureDetector(
-      onTapDown: (_) => setState(() => _isButtonPressed = true),
-      onTapUp: (_) {
-        setState(() => _isButtonPressed = false);
-        Navigator.of(context).pushNamed(
-          AppRouter.map,
-          arguments: widget.spot.cityId,
-        );
-      },
-      onTapCancel: () => setState(() => _isButtonPressed = false),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
-        transform: Matrix4.identity()..scale(_isButtonPressed ? 0.97 : 1.0),
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 18),
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              Color(0xFF778873),
-              Color(0xFFA1BC98),
-            ],
-          ),
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: [
-            BoxShadow(
-              color: const Color(0xFF778873).withOpacity(0.4),
-              blurRadius: 12,
-              offset: const Offset(0, 6),
-            ),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(
-              Icons.map_rounded,
-              color: Colors.white,
-              size: 24,
-            ),
-            const SizedBox(width: 12),
-            Text(
-              'View on Map',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

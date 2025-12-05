@@ -9,7 +9,8 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late List<Animation<double>> _cardAnimations;
   late List<Animation<Offset>> _slideAnimations;
@@ -22,8 +23,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
       vsync: this,
     );
 
+    // We now only need 3 animated items:
+    // 0: header, 1: Discover Places card, 2: Info section
     _cardAnimations = List.generate(
-      4,
+      3,
       (index) => Tween<double>(begin: 0.0, end: 1.0).animate(
         CurvedAnimation(
           parent: _controller,
@@ -37,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     );
 
     _slideAnimations = List.generate(
-      4,
+      3,
       (index) => Tween<Offset>(
         begin: const Offset(0, 0.3),
         end: Offset.zero,
@@ -101,23 +104,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 );
               },
             ),
-            const SizedBox(height: 16),
-            _buildAnimatedExploreCard(
-              context: context,
-              index: 2,
-              title: 'City Map',
-              subtitle: 'View all locations on an interactive map',
-              icon: Icons.map_rounded,
-              color: const Color(0xFF778873),
-              onTap: () {
-                Navigator.of(context).pushNamed(
-                  AppRouter.map,
-                  arguments: sampleCityId,
-                );
-              },
-            ),
             const SizedBox(height: 32),
-            _buildAnimatedInfoSection(context, 3),
+            _buildAnimatedInfoSection(context, 2),
           ],
         ),
       ),
@@ -154,16 +142,17 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                       Text(
                         'Welcome Back!',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xFF778873),
-                        ),
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFF778873),
+                            ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Where will you explore today?',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: const Color(0xFF778873).withOpacity(0.7),
-                        ),
+                              color:
+                                  const Color(0xFF778873).withOpacity(0.7),
+                            ),
                       ),
                     ],
                   ),
@@ -228,17 +217,21 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   const SizedBox(width: 8),
                   Text(
                     'More Features Coming Soon',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: const Color(0xFF778873),
-                    ),
+                    style:
+                        Theme.of(context).textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              color: const Color(0xFF778873),
+                            ),
                   ),
                 ],
               ),
               const SizedBox(height: 12),
-              _buildFeatureItem(context, Icons.location_city_rounded, 'Cities List'),
-              _buildFeatureItem(context, Icons.favorite_rounded, 'Favorites'),
-              _buildFeatureItem(context, Icons.photo_album_rounded, 'Memories & Scrapbook'),
+              _buildFeatureItem(
+                  context, Icons.location_city_rounded, 'Cities List'),
+              _buildFeatureItem(
+                  context, Icons.favorite_rounded, 'Favorites'),
+              _buildFeatureItem(context, Icons.photo_album_rounded,
+                  'Memories & Scrapbook'),
             ],
           ),
         ),
@@ -246,7 +239,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
     );
   }
 
-  Widget _buildFeatureItem(BuildContext context, IconData icon, String text) {
+  Widget _buildFeatureItem(
+      BuildContext context, IconData icon, String text) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: Row(
@@ -260,8 +254,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           Text(
             text,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: const Color(0xFF778873).withOpacity(0.8),
-            ),
+                  color: const Color(0xFF778873).withOpacity(0.8),
+                ),
           ),
         ],
       ),
@@ -344,17 +338,23 @@ class _ExploreCardState extends State<_ExploreCard> {
                   children: [
                     Text(
                       widget.title,
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge
+                          ?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       widget.subtitle,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.white.withOpacity(0.9),
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(
+                            color: Colors.white.withOpacity(0.9),
+                          ),
                     ),
                   ],
                 ),

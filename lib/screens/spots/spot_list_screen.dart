@@ -7,7 +7,6 @@ import 'package:smd_project_travelmate/models/spot.dart';
 import 'package:smd_project_travelmate/widgets/custom_appbar.dart';
 import 'package:smd_project_travelmate/widgets/spot_card.dart';
 import 'package:smd_project_travelmate/app_router.dart';
-import 'package:smd_project_travelmate/utils/helpers.dart';
 
 class SpotListScreen extends StatefulWidget {
   final String cityId;
