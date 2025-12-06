@@ -15,8 +15,8 @@ class _HomeScreenState extends State<HomeScreen>
   late List<Animation<double>> _cardAnimations;
   late List<Animation<Offset>> _slideAnimations;
 
-  final int _totalCards =
-      3; // Number of animated cards (Discover, Memories, Info)
+  // Header (0) + Discover (1) + Memories (2) + Itinerary (3) = 4
+  final int _totalCards = 4;
 
   @override
   void initState() {
@@ -26,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen>
       vsync: this,
     );
 
-    // Initialize animations safely
     _cardAnimations = List.generate(
       _totalCards,
       (index) => Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -43,17 +42,19 @@ class _HomeScreenState extends State<HomeScreen>
 
     _slideAnimations = List.generate(
       _totalCards,
-      (index) =>
-          Tween<Offset>(begin: const Offset(0, 0.3), end: Offset.zero).animate(
-            CurvedAnimation(
-              parent: _controller,
-              curve: Interval(
-                index * 0.12,
-                0.6 + (index * 0.12),
-                curve: Curves.easeOutCubic,
-              ),
-            ),
+      (index) => Tween<Offset>(
+        begin: const Offset(0, 0.3),
+        end: Offset.zero,
+      ).animate(
+        CurvedAnimation(
+          parent: _controller,
+          curve: Interval(
+            index * 0.12,
+            0.6 + (index * 0.12),
+            curve: Curves.easeOutCubic,
           ),
+        ),
+      ),
     );
 
     _controller.forward();
@@ -84,6 +85,8 @@ class _HomeScreenState extends State<HomeScreen>
           children: [
             _buildAnimatedHeader(context, 0),
             const SizedBox(height: 24),
+
+            // Card 1 — Discover Places
             _buildAnimatedExploreCard(
               context: context,
               index: 1,
@@ -92,21 +95,38 @@ class _HomeScreenState extends State<HomeScreen>
               icon: Icons.place_rounded,
               color: const Color(0xFFA1BC98),
               onTap: () {
-                Navigator.of(
-                  context,
-                ).pushNamed(AppRouter.spotList, arguments: sampleCityId);
+                Navigator.of(context).pushNamed(
+                  AppRouter.spotList,
+                  arguments: sampleCityId,
+                );
               },
             ),
             const SizedBox(height: 16),
+
+            // Card 2 — My Memories
             _buildAnimatedExploreCard(
               context: context,
               index: 2,
               title: 'My Memories',
               subtitle: 'View & manage your travel scrapbook',
               icon: Icons.photo_album_rounded,
-              color: const Color(0xFFA1BC98),
+              color: const Color(0xFF778873),
               onTap: () {
                 Navigator.of(context).pushNamed(AppRouter.memoryList);
+              },
+            ),
+            const SizedBox(height: 16),
+
+            // Card 3 — My Itinerary (NEW)
+            _buildAnimatedExploreCard(
+              context: context,
+              index: 3,
+              title: 'My Itinerary',
+              subtitle: 'Plan and organize your trip',
+              icon: Icons.playlist_add_check_rounded,
+              color: const Color(0xFF556B2F),
+              onTap: () {
+                Navigator.of(context).pushNamed(AppRouter.itinerary);
               },
             ),
           ],
@@ -116,7 +136,6 @@ class _HomeScreenState extends State<HomeScreen>
   }
 
   Widget _buildAnimatedHeader(BuildContext context, int index) {
-    // Use index safely with min
     final safeIndex = index.clamp(0, _slideAnimations.length - 1);
     return SlideTransition(
       position: _slideAnimations[safeIndex],
@@ -147,16 +166,16 @@ class _HomeScreenState extends State<HomeScreen>
                       Text(
                         'Welcome Back!',
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xFF778873),
-                        ),
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFF778873),
+                            ),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Where will you explore today?',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: const Color(0xFF778873).withOpacity(0.7),
-                        ),
+                              color: const Color(0xFF778873).withOpacity(0.7),
+                            ),
                       ),
                     ],
                   ),
@@ -235,7 +254,10 @@ class _ExploreCardState extends State<_ExploreCard> {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [widget.color, widget.color.withOpacity(0.8)],
+              colors: [
+                widget.color,
+                widget.color.withOpacity(0.8),
+              ],
             ),
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
@@ -254,7 +276,11 @@ class _ExploreCardState extends State<_ExploreCard> {
                   color: Colors.white.withOpacity(0.3),
                   borderRadius: BorderRadius.circular(16),
                 ),
-                child: Icon(widget.icon, size: 32, color: Colors.white),
+                child: Icon(
+                  widget.icon,
+                  size: 32,
+                  color: Colors.white,
+                ),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -264,16 +290,16 @@ class _ExploreCardState extends State<_ExploreCard> {
                     Text(
                       widget.title,
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       widget.subtitle,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.white.withOpacity(0.9),
-                      ),
+                            color: Colors.white.withOpacity(0.9),
+                          ),
                     ),
                   ],
                 ),

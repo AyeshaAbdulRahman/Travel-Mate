@@ -5,6 +5,8 @@ import 'package:smd_project_travelmate/screens/splash/splash_screen.dart';
 import 'package:smd_project_travelmate/screens/home/home_screen.dart';
 import 'package:smd_project_travelmate/screens/spots/spot_list_screen.dart';
 import 'package:smd_project_travelmate/screens/spots/spot_detail_screen.dart';
+import 'package:smd_project_travelmate/screens/itinerary/itinerary_screen.dart';
+
 
 // Memory Screens
 import 'package:smd_project_travelmate/screens/memories/add_memory_screen.dart';
@@ -18,6 +20,8 @@ import 'package:smd_project_travelmate/models/memory.dart';
 class AppRouter {
   static const String splash = '/';
   static const String home = '/home';
+  static const String itinerary = '/itinerary';
+
 
   // Spots
   static const String spotList = '/spots';
@@ -68,6 +72,9 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) => MemoryDetailScreen(memory: memory, keyId: keyId),
         );
+
+      case AppRouter.itinerary:
+        return MaterialPageRoute(builder: (_) => const ItineraryScreen());
 
       // Unknown Route
       default:

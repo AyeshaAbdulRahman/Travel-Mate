@@ -19,37 +19,48 @@ import 'package:smd_project_travelmate/theme/app_theme.dart';
 import 'package:smd_project_travelmate/data/repositories/spot_repository.dart';
 import 'package:smd_project_travelmate/data/repositories/location_repository.dart';
 import 'package:smd_project_travelmate/data/repositories/memory_repository.dart';
+import 'package:smd_project_travelmate/data/repositories/itinerary_repository.dart';
 
 // BLOCS
 import 'package:smd_project_travelmate/blocs/spot/spot_bloc.dart';
 import 'package:smd_project_travelmate/blocs/map/map_bloc.dart';
 import 'package:smd_project_travelmate/blocs/memory/memory_bloc.dart';
 import 'package:smd_project_travelmate/blocs/memory/memory_event.dart';
+import 'package:smd_project_travelmate/blocs/itinerary/itinerary_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // ⭐ Initialize Firebase
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   // ⭐ Initialize Hive
   await Hive.initFlutter();
 
   // ⭐ Register Hive adapters
   Hive.registerAdapter(MemoryAdapter());
+  // If Tag is also stored in Hive and you have a TagAdapter, register it here:
+  // Hive.registerAdapter(TagAdapter());
 
   // ⭐ Initialize repositories
   final spotRepository = SpotRepository();
-  final locationRepository = LocationRepository(spotRepository: spotRepository);
+  final locationRepository =
+      LocationRepository(spotRepository: spotRepository);
 
   // ⭐ MemoryRepository MUST be initialized before bloc
   final memoryRepository = await MemoryRepository.init();
+
+  // ⭐ Itinerary repository (in-memory for now)
+  final itineraryRepository = ItineraryRepository();
 
   runApp(
     TravelMateApp(
       spotRepository: spotRepository,
       locationRepository: locationRepository,
       memoryRepository: memoryRepository,
+      itineraryRepository: itineraryRepository,
     ),
   );
 }
@@ -58,12 +69,14 @@ class TravelMateApp extends StatelessWidget {
   final SpotRepository spotRepository;
   final LocationRepository locationRepository;
   final MemoryRepository memoryRepository;
+  final ItineraryRepository itineraryRepository;
 
   const TravelMateApp({
     super.key,
     required this.spotRepository,
     required this.locationRepository,
     required this.memoryRepository,
+    required this.itineraryRepository,
   });
 
   @override
@@ -71,9 +84,11 @@ class TravelMateApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         // ⭐ SPOT BLOC
-        BlocProvider(create: (_) => SpotBloc(spotRepository: spotRepository)),
+        BlocProvider(
+          create: (_) => SpotBloc(spotRepository: spotRepository),
+        ),
 
-        // ⭐ MAP + SPOTS
+        // ⭐ MAP + SPOTS (safe even if you don't use map screen anymore)
         BlocProvider(
           create: (_) => MapBloc(
             locationRepository: locationRepository,
@@ -84,6 +99,13 @@ class TravelMateApp extends StatelessWidget {
         // ⭐ MEMORY BLOC
         BlocProvider(
           create: (_) => MemoryBloc(memoryRepository)..add(LoadMemories()),
+        ),
+
+        // ⭐ ITINERARY BLOC (NEW)
+        BlocProvider(
+          create: (_) => ItineraryBloc(
+            repository: itineraryRepository,
+          ),
         ),
       ],
       child: MaterialApp(
