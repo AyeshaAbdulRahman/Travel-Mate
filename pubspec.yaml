@@ -76,6 +76,7 @@ flutter:
   assets:
     - lib/data/local/spots.json
     - lib/data/local/cities.json
+    - assets/images/spots/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

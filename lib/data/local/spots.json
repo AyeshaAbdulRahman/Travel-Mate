@@ -4,7 +4,7 @@
     "cityId": "karachi",
     "name": "Clifton Beach",
     "description": "A popular beach in Karachi known for its sunsets and relaxing environment.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Clifton_Karachi_Beach.jpg",
+    "imageUrl": "assets/images/spots/karachi_clifton_beach.jpg",
     "category": "Beach",
     "location": {
       "latitude": 24.8028,
@@ -17,7 +17,7 @@
     "cityId": "karachi",
     "name": "Mazar-e-Quaid",
     "description": "The mausoleum of Quaid-e-Azam Muhammad Ali Jinnah, founder of Pakistan.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Mazar_e_Quaid_2013.jpg",
+    "imageUrl": "assets/images/spots/karachi_mazar_e_quaid.JPG",
     "category": "Historical",
     "location": {
       "latitude": 24.8734,
@@ -30,7 +30,7 @@
     "cityId": "karachi",
     "name": "Dolmen Mall Clifton",
     "description": "One of Karachi's largest shopping malls with international brands and restaurants.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8b/Dolmen_Mall_Clifton.jpg",
+    "imageUrl": "assets/images/spots/Dolmen_Mall_Clifton.jpg",
     "category": "Shopping",
     "location": {
       "latitude": 24.8134,
@@ -44,7 +44,7 @@
     "cityId": "lahore",
     "name": "Badshahi Mosque",
     "description": "A Mughal-era mosque and one of the largest in the world, built in 1673.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Badshahi_Mosque_2016.jpg",
+    "imageUrl": "assets/images/spots/lahore_badshahi_mosque.jpg",
     "category": "Historical",
     "location": {
       "latitude": 31.5885,
@@ -57,7 +57,7 @@
     "cityId": "lahore",
     "name": "Minar-e-Pakistan",
     "description": "Famous monument commemorating the Lahore Resolution of 1940.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/3/30/Minar_e_Pakistan_2015.jpg",
+    "imageUrl": "assets/images/spots/lahore_minar_e_pakistan.jpg",
     "category": "Monument",
     "location": {
       "latitude": 31.5925,
@@ -70,7 +70,7 @@
     "cityId": "lahore",
     "name": "Shalimar Gardens",
     "description": "Mughal-era garden complex featuring terraces, fountains, and historic architecture.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/8/8c/Shalimar_Gardens_Lahore.jpg",
+    "imageUrl": "assets/images/spots/lahore_shalimar_garden.jpg",
     "category": "Garden",
     "location": {
       "latitude": 31.5806,
@@ -84,7 +84,7 @@
     "cityId": "islamabad",
     "name": "Faisal Mosque",
     "description": "Iconic mosque known for its modern architecture and scenic views of Margalla Hills.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/7/73/Faisal_Mosque_Islamabad.jpg",
+    "imageUrl": "assets/images/spots/islamabad_faisal_mosque.jpg",
     "category": "Religious",
     "location": {
       "latitude": 33.7292,
@@ -97,7 +97,7 @@
     "cityId": "islamabad",
     "name": "Daman-e-Koh",
     "description": "A viewpoint in the Margalla Hills offering panoramic views of Islamabad.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Daman_e_Koh_Viewpoint.jpg",
+    "imageUrl": "assets/images/spots/islamabad_daman-e-koh.jpg",
     "category": "Viewpoint",
     "location": {
       "latitude": 33.7500,
@@ -110,7 +110,7 @@
     "cityId": "islamabad",
     "name": "Pakistan Monument",
     "description": "A national monument representing the four provinces and three territories of Pakistan.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Pakistan_Monument_Islamabad.jpg",
+    "imageUrl": "assets/images/spots/islamabad_monument.jpg ",
     "category": "Monument",
     "location": {
       "latitude": 33.6938,
