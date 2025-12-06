@@ -225,7 +225,7 @@ class _SpotListScreenState extends State<SpotListScreen>
                 break;
 
               case SpotStatus.success:
-                if (state.spots.isEmpty) {
+                if (state.spots == null || state.spots!.isEmpty) {
                   content = Center(
                     child: Container(
                       margin: const EdgeInsets.all(32),
@@ -279,9 +279,9 @@ class _SpotListScreenState extends State<SpotListScreen>
                 } else {
                   content = ListView.builder(
                     padding: const EdgeInsets.all(16),
-                    itemCount: state.spots.length,
+                    itemCount: state.spots!.length,
                     itemBuilder: (context, index) {
-                      final spot = state.spots[index];
+                      final spot = state.spots![index];
                       return _AnimatedSpotCard(
                         key: ValueKey(spot.id),
                         spot: spot,

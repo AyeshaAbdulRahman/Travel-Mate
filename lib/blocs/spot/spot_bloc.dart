@@ -8,6 +8,8 @@ class SpotBloc extends Bloc<SpotEvent, SpotState> {
 
   SpotBloc({required this.spotRepository}) : super(const SpotState()) {
     on<LoadSpotsForCity>(_onLoadSpotsForCity);
+    on<MarkSpotVisited>(_onMarkSpotVisited);
+    on<MarkSpotNotVisited>(_onMarkSpotNotVisited);
   }
 
   Future<void> _onLoadSpotsForCity(
@@ -20,6 +22,43 @@ class SpotBloc extends Bloc<SpotEvent, SpotState> {
       emit(state.copyWith(status: SpotStatus.success, spots: spots));
     } catch (e) {
       emit(state.copyWith(status: SpotStatus.failure, errorMessage: e.toString()));
+    }
+  }
+
+  void _onMarkSpotVisited(
+    MarkSpotVisited event,
+    Emitter<SpotState> emit,
+  ) {
+    if (state.spots != null) {
+      final updatedSpots = state.spots!.map((spot) {
+        if (spot.id == event.spotId) {
+          return spot.copyWith(
+            isVisited: true,
+            visitedDate: DateTime.now().toIso8601String(),
+          );
+        }
+        return spot;
+      }).toList();
+      emit(state.copyWith(spots: updatedSpots));
+    }
+  }
+
+  void _onMarkSpotNotVisited(
+    MarkSpotNotVisited event,
+    Emitter<SpotState> emit,
+  ) {
+    if (state.spots != null) {
+      final updatedSpots = state.spots!.map((spot) {
+        if (spot.id == event.spotId) {
+          return spot.copyWith(
+            isVisited: false,
+            visitedDate: null,
+            userPhotos: null,
+          );
+        }
+        return spot;
+      }).toList();
+      emit(state.copyWith(spots: updatedSpots));
     }
   }
 }

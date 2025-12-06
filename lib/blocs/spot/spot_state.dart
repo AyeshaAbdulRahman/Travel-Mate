@@ -4,15 +4,15 @@ import 'package:smd_project_travelmate/models/spot.dart';
 enum SpotStatus { initial, loading, success, failure }
 
 class SpotState extends Equatable {
-  final SpotStatus status;
-  final List<Spot> spots;
-  final String? errorMessage;
-
   const SpotState({
     this.status = SpotStatus.initial,
-    this.spots = const [],
+    this.spots,
     this.errorMessage,
   });
+
+  final SpotStatus status;
+  final List<Spot>? spots;
+  final String? errorMessage;
 
   SpotState copyWith({
     SpotStatus? status,
@@ -22,10 +22,10 @@ class SpotState extends Equatable {
     return SpotState(
       status: status ?? this.status,
       spots: spots ?? this.spots,
-      errorMessage: errorMessage,
+      errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 
   @override
-  List<Object?> get props => [status, spots, errorMessage ?? ''];
+  List<Object?> get props => [status, spots, errorMessage];
 }

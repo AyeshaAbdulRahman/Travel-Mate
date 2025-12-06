@@ -9,6 +9,9 @@ class Spot extends Equatable {
   final String imageUrl;
   final LocationModel location;
   final String? category;
+  final bool isVisited;
+  final String? visitedDate;
+  final List<String>? userPhotos;
 
   const Spot({
     required this.id,
@@ -18,6 +21,9 @@ class Spot extends Equatable {
     required this.imageUrl,
     required this.location,
     this.category,
+    this.isVisited = false,
+    this.visitedDate,
+    this.userPhotos,
   });
 
   factory Spot.fromJson(Map<String, dynamic> json) {
@@ -41,9 +47,38 @@ class Spot extends Equatable {
       'imageUrl': imageUrl,
       'category': category,
       'location': location.toJson(),
+      'isVisited': isVisited,
+      'visitedDate': visitedDate,
+      'userPhotos': userPhotos,
     };
   }
 
+  Spot copyWith({
+    String? id,
+    String? cityId,
+    String? name,
+    String? description,
+    String? imageUrl,
+    LocationModel? location,
+    String? category,
+    bool? isVisited,
+    String? visitedDate,
+    List<String>? userPhotos,
+  }) {
+    return Spot(
+      id: id ?? this.id,
+      cityId: cityId ?? this.cityId,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      imageUrl: imageUrl ?? this.imageUrl,
+      location: location ?? this.location,
+      category: category ?? this.category,
+      isVisited: isVisited ?? this.isVisited,
+      visitedDate: visitedDate ?? this.visitedDate,
+      userPhotos: userPhotos ?? this.userPhotos,
+    );
+  }
+
   @override
-  List<Object?> get props => [id, cityId, name, description, imageUrl, category, location];
+  List<Object?> get props => [id, cityId, name, description, imageUrl, category, location, isVisited, visitedDate, userPhotos];
 }

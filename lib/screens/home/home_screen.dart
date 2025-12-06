@@ -15,8 +15,8 @@ class _HomeScreenState extends State<HomeScreen>
   late List<Animation<double>> _cardAnimations;
   late List<Animation<Offset>> _slideAnimations;
 
-  // Header (0) + Discover (1) + Memories (2) + Itinerary (3) = 4
-  final int _totalCards = 4;
+  // Header (0) + Discover (1) + Memories (2) + Itinerary (3) + Travel Map (4) = 5
+  final int _totalCards = 5;
 
   @override
   void initState() {
@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen>
             ),
             const SizedBox(height: 16),
 
-            // Card 3 — My Itinerary (NEW)
+            // Card 3 — My Itinerary
             _buildAnimatedExploreCard(
               context: context,
               index: 3,
@@ -127,6 +127,20 @@ class _HomeScreenState extends State<HomeScreen>
               color: const Color(0xFF556B2F),
               onTap: () {
                 Navigator.of(context).pushNamed(AppRouter.itinerary);
+              },
+            ),
+            const SizedBox(height: 16),
+
+            // Card 4 — Travel Map
+            _buildAnimatedExploreCard(
+              context: context,
+              index: 4,
+              title: 'Travel Map',
+              subtitle: 'View your visited places on a map',
+              icon: Icons.map_rounded,
+              color: const Color(0xFF4CAF50),
+              onTap: () {
+                Navigator.of(context).pushNamed(AppRouter.visitedMap);
               },
             ),
           ],

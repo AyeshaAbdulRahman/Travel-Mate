@@ -27,6 +27,7 @@ import 'package:smd_project_travelmate/blocs/map/map_bloc.dart';
 import 'package:smd_project_travelmate/blocs/memory/memory_bloc.dart';
 import 'package:smd_project_travelmate/blocs/memory/memory_event.dart';
 import 'package:smd_project_travelmate/blocs/itinerary/itinerary_bloc.dart';
+import 'package:smd_project_travelmate/blocs/map/map_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

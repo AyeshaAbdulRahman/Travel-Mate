@@ -6,7 +6,7 @@ import 'package:smd_project_travelmate/screens/home/home_screen.dart';
 import 'package:smd_project_travelmate/screens/spots/spot_list_screen.dart';
 import 'package:smd_project_travelmate/screens/spots/spot_detail_screen.dart';
 import 'package:smd_project_travelmate/screens/itinerary/itinerary_screen.dart';
-
+import 'package:smd_project_travelmate/screens/map/visited_map_screen.dart';
 
 // Memory Screens
 import 'package:smd_project_travelmate/screens/memories/add_memory_screen.dart';
@@ -26,11 +26,12 @@ class AppRouter {
   // Spots
   static const String spotList = '/spots';
   static const String spotDetail = '/spots/detail';
-
+ static const String visitedMap = '/map/visited';
   // Memories
   static const String memoryList = '/memories';
   static const String addMemory = '/memories/add';
   static const String memoryDetail = '/memories/detail';
+
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -41,6 +42,9 @@ class AppRouter {
       // Home Screen
       case home:
         return MaterialPageRoute(builder: (_) => const HomeScreen());
+
+   case visitedMap:
+        return MaterialPageRoute(builder: (_) => const VisitedMapScreen());
 
       // Spot List
       case spotList:

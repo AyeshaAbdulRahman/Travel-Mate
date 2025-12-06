@@ -15,3 +15,21 @@ class LoadSpotsForCity extends SpotEvent {
   @override
   List<Object?> get props => [cityId];
 }
+
+class MarkSpotVisited extends SpotEvent {
+  final String spotId;
+
+  const MarkSpotVisited(this.spotId);
+
+  @override
+  List<Object?> get props => [spotId];
+}
+
+class MarkSpotNotVisited extends SpotEvent {
+  final String spotId;
+
+  const MarkSpotNotVisited(this.spotId);
+
+  @override
+  List<Object?> get props => [spotId];
+}
